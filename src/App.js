@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Calendar</h1>
+      <h1>Message</h1>
       <h3>{message}</h3>
     </div>
   );
