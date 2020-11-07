@@ -1,6 +1,4 @@
 const {Router} = require('express')
-const electron = require('electron')
-const path = require('path')
 
 const routes = Router()
 
