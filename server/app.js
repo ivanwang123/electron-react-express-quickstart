@@ -11,8 +11,8 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 
-app.use(express.static(path.join(__dirname, '/../')))
-console.log('STATIC', path.join(__dirname, '/../'))
+app.use(express.static(path.join(__dirname, '/../public')))
+console.log('STATIC', path.join(__dirname, '/../public'))
 
 app.use(require('./routes'))
 

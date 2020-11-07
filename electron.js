@@ -1,7 +1,7 @@
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const url = require('url')
-const {App} = require('../server/app')
+const {App} = require('./server/app')
 
 let mainWindow
 
@@ -14,14 +14,15 @@ function createWindow () {
       nodeIntegration: true
     }
   })
+  mainWindow.loadURL(`http://localhost:3000/`)
 
-  // const startUrl = `http://localhost:${App.get('port')}/`
-  const startUrl = `http://localhost:3000/`
-  console.log('START URL', startUrl)
-  
-  mainWindow.loadURL(startUrl)
+  hiddenWindow = new BrowserWindow({show: false})
+  hiddenWindow.loadURL(`http://localhost:${App.get('port')}/`)
 
-  mainWindow.on('closed', () => mainWindow = null)
+  mainWindow.on('closed', () => {
+    mainWindow = null
+    hiddenWindow = null
+  })
 }
 
 app.on('ready', createWindow)

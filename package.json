@@ -1,7 +1,7 @@
 {
   "name": "electron-react-express-quickstart",
   "productName": "Electron+React+Express Quickstart",
-  "main": "public/electron/main.js",
+  "main": "electron.js",
   "homepage": "./",
   "version": "0.1.0",
   "private": true,
