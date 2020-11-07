@@ -1,6 +1,7 @@
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const url = require('url')
+const isDev = require('electron-is-dev')
 const {App} = require('./server/app')
 
 let mainWindow
@@ -14,13 +15,15 @@ function createWindow () {
       nodeIntegration: true
     }
   })
-  mainWindow.loadURL(`http://localhost:3000/`)
+  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, 'index.html')}`)
 
   hiddenWindow = new BrowserWindow({show: false})
   hiddenWindow.loadURL(`http://localhost:${App.get('port')}/`)
 
   mainWindow.on('closed', () => {
     mainWindow = null
+
+    hiddenWindow.close()
     hiddenWindow = null
   })
 }
