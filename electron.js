@@ -1,6 +1,7 @@
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev')
+const ipcMain = require('electron').ipcMain
 const {App} = require('./server/app')
 
 let mainWindow
@@ -18,6 +19,10 @@ function createWindow () {
 
   hiddenWindow = new BrowserWindow({show: false})
   hiddenWindow.loadURL(`http://localhost:${App.get('port')}/`)
+
+  ipcMain.on('set-server', (e, args) => {
+    e.returnValue = {port: App.get('port')}
+  })
 
   mainWindow.on('closed', () => {
     mainWindow = null

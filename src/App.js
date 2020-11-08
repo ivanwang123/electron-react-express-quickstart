@@ -1,5 +1,14 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
+const {ipcRenderer} = window.require('electron')
+
+// Get server port from electron and set as default url
+const serverRes = ipcRenderer.sendSync('set-server')
+axios.defaults.baseURL = `http://localhost:${serverRes.port}`
+
+axios.defaults.headers.common = {
+  "Content-Type": "application/json"
+}
 
 function App() {
 
